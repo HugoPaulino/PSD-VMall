@@ -12,17 +12,11 @@ import common.Loja;
 import common.Produto;
 import common.Utils;
 
-public class Servidor extends UnicastRemoteObject implements IServidor {
+public class Servidor  implements IServidor {
 
-	protected Servidor() throws RemoteException {
-		super();
-		// TODO Auto-generated constructor stub
-	}
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+
+	
 	private Vector<Loja> lojas = new Vector<Loja>(); 
 	private Map<Integer,Carrinho> carroCliente = new HashMap<Integer,Carrinho>();
 	
