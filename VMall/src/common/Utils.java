@@ -18,15 +18,7 @@ public class Utils {
 			
 		System.setProperty(CODEBASE, caminho);
 	}
-	// devolve o produto existente se não existir devolve null
-	public static Produto  getProduto(Vector<Loja> lojas, String nome){
 	
-		for(Loja l:lojas)
-		for(Produto p : l.getProdutos())
-			if(p.getNome().equalsIgnoreCase(nome))
-				return p;
-	return null;
-	}
 	
 	
 	// criar uma sessao aleatoria
