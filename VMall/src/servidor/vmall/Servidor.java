@@ -1,49 +1,52 @@
 package servidor.vmall;
 
+import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 
 import common.IServidor;
-
 import common.Utils;
 
-public class Servidor  implements IServidor {
+// alterar para a minha serialização
+public class Servidor  implements Serializable {
+
+
+	int janelaProcessamento = 4; //4 CPU's  
+
+	ScheduledExecutorService executor = Executors.newScheduledThreadPool(janelaProcessamento);  
 
 
 
-	
-	
+
 	private Map<Short,Short[] > carroCliente = new HashMap<Short,Short[]>();
-	
-	private void carregarLojas(){
-		
-	};
-	
 
 
-	public boolean existeProduto(String nome) throws RemoteException {
-		
-		return true;
-	}
+	// le os varios ficheiros e devolve a loja e os varios produtos
+	public Map<Short,Short[]> lerficheiro(){
+		Map<Short,Short[] > leficheiro = new HashMap<Short,Short[]>();
 
-	public boolean adicionarProdutoCarrinho(String loja, String produto) throws RemoteException {
-		// TODO Auto-generated method stub
-		return false;
+		return leficheiro;
+
 	}
 
 
-	public String listaProdutosSC(short idCliente, short idCarro) throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+	// Aplica operaçoes sobre os varios ficheiros e 
+	public Map<Short,Short[]> escreveficheiro(){
+		Map<Short,Short[] > leficheiro = new HashMap<Short,Short[]>();
+
+		return carroCliente;
+
 	}
 
-	public String pagar(short idCliente, short idCarro) throws RemoteException {
-		
-		
-		return null;
+	// actualiza em background a informação dos ficheiros
+	public void actualiza(){
+
+
 	}
 
 }
