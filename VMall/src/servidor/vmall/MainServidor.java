@@ -17,7 +17,7 @@ public class MainServidor {
 		Utils.setCodeBase(IServidor.class);
 		
 		servidor = new Servidor();
-		Remote remote = (IServidor)UnicastRemoteObject.exportObject(servidor,1099);
+		Remote remote = (IServidor)UnicastRemoteObject.exportObject((Remote) servidor,1099);
 		
 		
 		Registry registry = LocateRegistry.createRegistry(1099);
@@ -29,7 +29,7 @@ public class MainServidor {
 		System.in.read();
 		
 		registry.unbind("Pepito");
-		UnicastRemoteObject.unexportObject(servidor, true);
+		UnicastRemoteObject.unexportObject((Remote) servidor, true);
 		
 	}
 

@@ -1,5 +1,6 @@
 package servidor.vmall;
 
+import java.io.File;
 import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -15,15 +16,14 @@ import common.Utils;
 // alterar para a minha serialização
 public class Servidor  implements Serializable {
 
-
+	private File f ;
+	
+	
+	
+	
 	int janelaProcessamento = 4; //4 CPU's  
 
 	ScheduledExecutorService executor = Executors.newScheduledThreadPool(janelaProcessamento);  
-
-
-
-
-	private Map<Short,Short[] > carroCliente = new HashMap<Short,Short[]>();
 
 
 	// le os varios ficheiros e devolve a loja e os varios produtos
@@ -39,7 +39,7 @@ public class Servidor  implements Serializable {
 	public Map<Short,Short[]> escreveficheiro(){
 		Map<Short,Short[] > leficheiro = new HashMap<Short,Short[]>();
 
-		return carroCliente;
+		return leficheiro ;
 
 	}
 
