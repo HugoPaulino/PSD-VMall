@@ -26,8 +26,7 @@
 
 	<nav id="main-nav">
 		<ul>
-			<li><a href="#0">Home</a></li>
-			<li><a href="#0">Stores</a></li>
+			<li><a href="Index.jsp">Stores</a></li>
 			<li><a href="#0">About</a></li>
 		</ul>
 	</nav>
@@ -93,13 +92,13 @@
 				<span class="cd-qty">1x</span> Product Name
 				<a href="#0" class="cd-item-remove cd-img-replace">Remove</a>
 			</li>
-		</ul> <!-- cd-cart-items -->
+		</ul>
 
 		<div style="padding-top:30px;"></div>
 
 		<a href="#0" class="checkout-btn">Checkout</a>
 
-	</div> <!-- cd-cart -->
+	</div> 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script src="js/main.js"></script> <!-- Gem jQuery -->
 </body>
