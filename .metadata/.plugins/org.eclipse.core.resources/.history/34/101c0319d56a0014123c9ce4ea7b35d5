@@ -14,27 +14,10 @@
   	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
     <script>
 	    $( document ).ready(function() {
-	    	if(typeof(Storage) !== "undefined") {
-	    		var userID = localStorage.getItem("UserID");
-				var user = localStorage.getItem("User");
-				if (user == null)
-				{
-					var personID = 1 + Math.floor(Math.random() * 1000);
-					var person = prompt("Please enter your name", "Client");
-			    	if (person != null) {
-			    	    document.getElementById("User").innerHTML =
-			    	    "Hello, " + person + "!";
-			    	}
-		
-		    		localStorage.setItem("User", person);
-		    		localStorage.setItem("UserID", personID);
-				}
-	    		
-				document.getElementById("User").innerHTML = "Hello, " + localStorage.getItem("User") + "!";
-	
-	    	}
-	    	else {
-	        	alert("Sorry, your browser does not support web storage...");
+	    	var person = prompt("Please enter your name", "Client");
+	    	if (person != null) {
+	    	    document.getElementById("demo").innerHTML =
+	    	    "Hello " + person + "! How are you today?";
 	    	}
 	    });
 	</script>
@@ -52,7 +35,7 @@
 
 	<nav id="main-nav">
 		<ul>
-			<li><a id="User"></a></li>
+			<li>Hello, Client</li>
 			<li><a href="Index.jsp">Stores</a></li>
 			<li><a href="#0">About</a></li>
 		</ul>
