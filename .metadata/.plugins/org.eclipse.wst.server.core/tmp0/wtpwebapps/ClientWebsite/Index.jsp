@@ -11,7 +11,33 @@
 	<link rel="stylesheet" href="css/reset.css"> <!-- CSS reset -->
 	<link rel="stylesheet" href="css/style.css"> <!-- Gem style -->
 	<script src="js/modernizr.js"></script>
-  	
+  	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script>
+	    $( document ).ready(function() {
+	    	if(typeof(Storage) !== "undefined") {
+	    		var userID = localStorage.getItem("UserID");
+				var user = localStorage.getItem("User");
+				if (user == null)
+				{
+					var personID = 1 + Math.floor(Math.random() * 1000);
+					var person = prompt("Please enter your name", "Client");
+			    	if (person != null) {
+			    	    document.getElementById("User").innerHTML =
+			    	    "Hello, " + person + "!";
+			    	}
+		
+		    		localStorage.setItem("User", person);
+		    		localStorage.setItem("UserID", personID);
+				}
+	    		
+				document.getElementById("User").innerHTML = "Hello, " + localStorage.getItem("User") + "!";
+	
+	    	}
+	    	else {
+	        	alert("Sorry, your browser does not support web storage...");
+	    	}
+	    });
+	</script>
 	<title>VMall :: Virtual Shopping Mall</title>
 </head>
 <body>
@@ -26,8 +52,8 @@
 
 	<nav id="main-nav">
 		<ul>
-			<li><a href="#0">Home</a></li>
-			<li><a href="#0">Stores</a></li>
+			<li><a id="User"></a></li>
+			<li><a href="Index.jsp">Stores</a></li>
 			<li><a href="#0">About</a></li>
 		</ul>
 	</nav>
@@ -93,14 +119,13 @@
 				<span class="cd-qty">1x</span> Product Name
 				<a href="#0" class="cd-item-remove cd-img-replace">Remove</a>
 			</li>
-		</ul> <!-- cd-cart-items -->
+		</ul>
 
 		<div style="padding-top:30px;"></div>
 
 		<a href="#0" class="checkout-btn">Checkout</a>
 
-	</div> <!-- cd-cart -->
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	</div> 
 <script src="js/main.js"></script> <!-- Gem jQuery -->
 </body>
 </html>

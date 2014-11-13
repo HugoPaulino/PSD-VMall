@@ -9,6 +9,11 @@
 <booleanAttribute key="org.eclipse.jdt.launching.DEFAULT_CLASSPATH" value="false"/>
 <stringAttribute key="org.eclipse.jdt.launching.JRE_CONTAINER" value="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.launching.macosx.MacOSXType/Java SE 8 [1.8.0_25]"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="start"/>
+<<<<<<< HEAD:.metadata/.plugins/org.eclipse.debug.core/.launches/apache-tomcat-8.0.14 at localhost.launch
 <stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Dcatalina.base=&quot;/Users/HugoSantos/Documents/PSD-VMall/.metadata/.plugins/org.eclipse.wst.server.core/tmp0&quot; -Dcatalina.home=&quot;/Users/HugoSantos/Documents/apache-tomcat-8.0.14&quot; -Dwtp.deploy=&quot;/Users/HugoSantos/Documents/PSD-VMall/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps&quot; -Djava.endorsed.dirs=&quot;/Users/HugoSantos/Documents/apache-tomcat-8.0.14/endorsed&quot;"/>
 <stringAttribute key="server-id" value="apache-tomcat-8.0.14 at localhost"/>
+=======
+<stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Dcatalina.base=&quot;/Users/brunoantunes/PSD-VMall/.metadata/.plugins/org.eclipse.wst.server.core/tmp0&quot; -Dcatalina.home=&quot;/Library/Tomcat&quot; -Dwtp.deploy=&quot;/Users/brunoantunes/PSD-VMall/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps&quot; -Djava.endorsed.dirs=&quot;/Library/Tomcat/endorsed&quot;"/>
+<stringAttribute key="server-id" value="Tomcat v8.0 Server at localhost"/>
+>>>>>>> FETCH_HEAD:.metadata/.plugins/org.eclipse.debug.core/.launches/Tomcat v8.0 Server at localhost.launch
 </launchConfiguration>
