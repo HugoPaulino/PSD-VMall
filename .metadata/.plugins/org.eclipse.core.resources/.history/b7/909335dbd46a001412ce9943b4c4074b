@@ -1,0 +1,18 @@
+package bdserver;
+
+import java.io.File;
+
+
+
+// Classe responsavel por criar e realizar as operaçoes sobre a base de dados
+public class DB_Server {
+ 
+	
+	private File f ;
+	
+	
+	
+	
+	
+	
+}

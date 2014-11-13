@@ -1,0 +1,51 @@
+package servidor.vmall;
+
+import java.io.Serializable;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Vector;
+
+import common.IServidor;
+import common.Utils;
+
+public class Servidor  implements IServidor,Serializable {
+
+
+	
+	
+	
+	private Map<Short,Short[] > carroCliente = new HashMap<Short,Short[]>();
+	
+	private void carregarLojas(){
+		
+		
+		
+	};
+	
+
+
+	public boolean existeProduto(String nome) throws RemoteException {
+		
+		return true;
+	}
+
+	public boolean adicionarProdutoCarrinho(String loja, String produto) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+	public String listaProdutosSC(short idCliente, short idCarro) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String pagar(short idCliente, short idCarro) throws RemoteException {
+		
+		
+		return null;
+	}
+
+}
