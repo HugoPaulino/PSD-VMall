@@ -11,17 +11,6 @@ import java.util.Map;
 
 import javax.swing.JOptionPane;
 
-import armazem.Armazem;
-import armazem.Caixote;
-import armazem.Operario;
-import azulejo.Azulejo;
-import azulejo.AzulejoBuracoNegro;
-import azulejo.AzulejoChao;
-import azulejo.AzulejoEscada;
-import azulejo.AzulejoExplosao;
-import azulejo.AzulejoFinal;
-import azulejo.AzulejoParede;
-import azulejo.AzulejoRolante;
 import dbserver.DBServer;
 
 
@@ -67,6 +56,8 @@ public class DB_ServerImpl implements DBServer,Serializable {
 	
 	@Override
 	public Map<Short, Short[]> read() throws RemoteException {
+		/*
+	}
 		try {
 			try {			
 				for(int i=0;i<lojas.length;i++){
@@ -153,7 +144,7 @@ public class DB_ServerImpl implements DBServer,Serializable {
 			System.exit( 1 );			
 		}
 		
-		
+		*/
 		
 		return null;
 	}
