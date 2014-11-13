@@ -1,0 +1,5 @@
+package bdserver;
+
+public class DB_Server {
+
+}
