@@ -15,6 +15,7 @@ import java.util.Vector;
 
 import javax.swing.JOptionPane;
 
+import dbserver.Carrinho;
 import dbserver.IServidor;
 
 
@@ -28,14 +29,14 @@ public class DB_ServerImpl  implements IServidor,Serializable {
 
 
 	private Map <Short,Vector<Short>> lojProd; 
-	private Map <Short,Vector<Short>> carrinho; 
+	private Map <Short,Carrinho> carrinho; 
 	private BufferedReader br;
 
 
 	// construtor inicializa o servidor e carrega os ficheiros no mapa
 	public DB_ServerImpl() throws IOException, RemoteException {
 		lojProd = new HashMap<Short, Vector<Short>>();
-		carrinho = new HashMap<Short, Vector<Short>>();
+		carrinho = new HashMap<Short, Carrinho>();
 		String[] cols= null;
 
 		br = new BufferedReader(new FileReader("/Users/HugoSantos/Documents/PSD-VMall/VMallServer/Lojas/loja1"));
@@ -57,7 +58,7 @@ public class DB_ServerImpl  implements IServidor,Serializable {
 
 				Vector<Short>  colValues = new Vector<Short>();
 
-				for (int i = 1; i < cols.length; i++) {
+				for (int i = 0; i < cols.length; i++) {
 					colValues.add(Short.parseShort(cols[i])) ;
 				}
 
@@ -76,6 +77,7 @@ public class DB_ServerImpl  implements IServidor,Serializable {
 
 
 		}finally{
+		
 			System.out.println("Não houve erros ao ler o ficheiro");
 		}
 
@@ -89,21 +91,30 @@ public class DB_ServerImpl  implements IServidor,Serializable {
 	// ver se existe no mapa se não existir é porque ja foi comprado 
 	@Override
 	public boolean isAvaliable(short produto) throws RemoteException {
-		for(Short i:lojProd.keySet())
-			for(Short prods:lojProd.get(i))
-				if(prods==produto)
+		for(Short i:lojProd.keySet()){
+			System.out.println("ID do OBJETO"+i);
+			for(Short prods:lojProd.get(i)){
+				System.out.println("valor do objeto"+prods);
+				if(prods==produto){
 					return true;
+				}
+			}
+		}
 		return false;
 	}
 
-	
+
 	// adiciona ao carrinho o produto 
 	@Override
-	public boolean addCarProd(short loja, short produto) throws RemoteException {
+	public boolean addCarProd(short guid,short loja, short produto) throws RemoteException {
 		
-		 
-		
-		return this.carrinho.get(loja).add(produto);
+		Vector <Short> v = new Vector <Short>();
+		v.add(produto);
+		Carrinho c = new Carrinho();
+		c.setIdLoja(loja);
+		c.setIdProdutos(v);
+		carrinho.put(guid, c);
+		return true;
 	}
 
 
@@ -111,17 +122,27 @@ public class DB_ServerImpl  implements IServidor,Serializable {
 	@Override
 	public  Vector<Short> getCarProd(short guid) throws RemoteException {
 
-		return carrinho.get(guid) ;
+		return null ;
 	}
 
 
 	// para pagar temos de percorrer os ficheiros para retirar os produtos da bd 
 	@Override
 	public synchronized Vector<Short>  payCarProd(short guid) throws RemoteException {
+		
+		
+
+		return null ; 
+	}
 
 
 
-		return carrinho.get(guid); 
+
+
+	@Override
+	public Map<Short, Vector<Short>> getLojProd() {
+		
+		return lojProd;
 	}
 
 
