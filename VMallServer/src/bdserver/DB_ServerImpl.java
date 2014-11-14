@@ -8,6 +8,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.Serializable;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
@@ -19,7 +20,7 @@ import dbserver.IServidor;
 
 
 // Classe responsavel por criar e realizar as operaçoes sobre a base de dados
-public class DB_ServerImpl implements IServidor,Serializable {
+public class DB_ServerImpl  implements IServidor,Serializable {
 
 
 	private File lojas[]= {new File("/Lojas/loja1"),new File("/Lojas/loja2"),new File("/Lojas/loja3"),
@@ -37,7 +38,7 @@ public class DB_ServerImpl implements IServidor,Serializable {
 		carrinho = new HashMap<Short, Vector<Short>>();
 		String[] cols= null;
 
-		br = new BufferedReader(new FileReader("/Resources/loja1"));
+		br = new BufferedReader(new FileReader("/Users/HugoSantos/Documents/PSD-VMall/VMallServer/Lojas/loja1"));
 		try  
 		{
 			String sCurrentLine;
