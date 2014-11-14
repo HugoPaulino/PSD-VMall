@@ -1,0 +1,15 @@
+package appserver;
+
+import java.rmi.RemoteException;
+
+import dbserver.AppServer;
+
+
+// metodos que implementam a logica da App
+public class Cliente {
+
+	
+	
+	
+
+}

@@ -3,153 +3,127 @@ package bdserver;
 import java.awt.Point;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Vector;
 
 import javax.swing.JOptionPane;
 
-import dbserver.DBServer;
+import dbserver.IServidor;
 
 
 
 // Classe responsavel por criar e realizar as operaçoes sobre a base de dados
-public class DB_ServerImpl implements DBServer,Serializable {
- 
-	
+public class DB_ServerImpl implements IServidor,Serializable {
+
+
 	private File lojas[]= {new File("/Lojas/loja1"),new File("/Lojas/loja2"),new File("/Lojas/loja3"),
 			new File("/Lojas/loja4"),new File("/Lojas/loja5")}  ;
-	
-	
-	private Map <Short,Short[]> lojProd = new HashMap<Short, Short[]>();
-	
 
-	
-	
-	// falta terminar a escrita
-	@Override
-	public boolean write(Map<Short, Short[]> lojProds) throws RemoteException {
-		// percorrer o mapa para escrever
-		for (Short keyloja : lojProd.keySet()) {
-			
-		// percorrer as lojas onde comprou para reservar ou comprar
-			for (Short keycompra: lojProds.keySet()){
-				
-			// ver se a loja onde comprou correspoonde a lojas existentes
-		    if (keyloja==keycompra) {
-		       // percorrer os produtos e assumir como marcados ou ja foram removidos 
-		    	// posso criar um metodo para os marcar como compraados e so depois remover 
-		    	
-		    }
+
+	private Map <Short,Vector<Short>> lojProd; 
+	private Map <Short,Vector<Short>> carrinho; 
+	private BufferedReader br;
+
+
+	// construtor inicializa o servidor e carrega os ficheiros no mapa
+	public DB_ServerImpl() throws IOException, RemoteException {
+		lojProd = new HashMap<Short, Vector<Short>>();
+		carrinho = new HashMap<Short, Vector<Short>>();
+		String[] cols= null;
+
+		br = new BufferedReader(new FileReader("/Resources/loja1"));
+		try  
+		{
+			String sCurrentLine;
+			while ((sCurrentLine = br.readLine()) != null) {
+				System.out.println(sCurrentLine);
+
+
+				cols = sCurrentLine.split(" ");
 			}
+			if (cols.length < 1) {
+				// handle error if there is not a key column
+			}
+
+			try {
+				short colKey = Short.parseShort(cols[0]);
+
+				Vector<Short>  colValues = new Vector<Short>();
+
+				for (int i = 1; i < cols.length; i++) {
+					colValues.add(Short.parseShort(cols[i])) ;
+				}
+
+				// adicionar os produtos e as lojas 
+				lojProd.put(colKey, colValues);
+
+				//  fechar a stream
+				br.close();
+
+
+			}catch (NumberFormatException e) {
+				e.printStackTrace();
+			}catch (IOException e) {
+				e.printStackTrace();
+			}
+
+
+		}finally{
+			System.out.println("Não houve erros ao ler o ficheiro");
 		}
-		
-		
+
+
+	}
+
+
+
+
+
+	// ver se existe no mapa se não existir é porque ja foi comprado 
+	@Override
+	public boolean isAvaliable(short produto) throws RemoteException {
+		for(Short i:lojProd.keySet())
+			for(Short prods:lojProd.get(i))
+				if(prods==produto)
+					return true;
 		return false;
 	}
 
-	/**
-	 * Mudar esta parte para a minha logica de leitura de ficheiros isto deve ser feito no setup logo quando arranca o server
-	 */
 	
+	// adiciona ao carrinho o produto 
 	@Override
-	public Map<Short, Short[]> read() throws RemoteException {
-		/*
-	}
-		try {
-			try {			
-				for(int i=0;i<lojas.length;i++){
-				BufferedReader in = new BufferedReader( new FileReader( lojas[i].getName() ));
-				
-				// agora ler a informa��o dos azulejos
-				in.readLine(); // ler a linha que tem "azulejos"
-				for( int y = 0; y < 16; y++ ){
-					String linha = in.readLine(); // assim retiram-se logo os \r\rn 
-					for( int x = 0; x < 16; x++ ){
-						char ch = linha.charAt(x);
-						Azulejo a = null;
-						switch( ch ){
-						case '-': break;// neste caso n�o faz nada
-						case 'P': // � uma parede
-							a = new AzulejoParede( lerarte.getParede() );
-							break;
-						case 'C':
-							a = new AzulejoChao( lerarte.getChao() );
-							break;
-						case 'B':
-							a= new AzulejoBuracoNegro(lerarte.getBuracoNegro());
-							break;
-						case 'U':
-							a= new AzulejoEscada(lerarte.getEscadaCima(),AzulejoEscada.CIMA);
-							break;
-						case 'D':
-							a= new AzulejoEscada(lerarte.getEscadaBaixo(), AzulejoEscada.BAIXO);
-							break;
-						case 'E':
-							a= new AzulejoExplosao(lerarte.getExplosao());
-							break;
-						case 'F':
-							a = new AzulejoFinal( lerarte.getFinale() );
-							break;						
-						case '^':
-							a = new AzulejoRolante( lerarte.getRolanteCima(), AzulejoRolante.CIMA );
-							break;						
-						case 'V':
-							a = new AzulejoRolante( lerarte.getRolanteBaixo(), AzulejoRolante.BAIXO );
-							break;						
-						case '<':
-							a = new AzulejoRolante( lerarte.getRolanteEsq(), AzulejoRolante.ESQUERDA );
-							break;						
-						case '>':
-							a = new AzulejoRolante( lerarte.getRolanteDir(), AzulejoRolante.DIREITA );
-							break;						
-						}
-							
-						arm.colocarAzulejo( new Point(x,y), a);
-					}
-				}
-				// agora ler a informa��o dos caixotes
-				in.readLine(); // ler a linha que tem "caixotes"
-				for( int y = 0; y < 16; y++ ){
-					String linha = in.readLine(); // assim retiram-se logo os \r\rn
-					for( int x = 0; x < 16; x++ ){
-						char ch = linha.charAt(x);
-						Caixote c = null;
-						switch( ch ){
-						case '-': break;// neste caso n�o faz nada
-						case 'C': // � um caixote
-							c = new Caixote( lerarte.getCaixote() );
-							break;
-						}
-						arm.colocarCaixote( new Point(x,y), c);
-					}
-				}			
-				// ler a posi��o do oper�rio
-				in.readLine(); 			// ignorar porque deve ser a que diz "oper�rio"
-				String spos[] = in.readLine().split(",");
-				Point pos = new Point( Integer.parseInt(spos[0]), Integer.parseInt(spos[1]));
-				Operario op =new Operario(lerarte.getOperario());
-				arm.colocarOperario(pos, op );
-				return arm;
-			} catch( Exception e ){
-				e.printStackTrace();
-				JOptionPane.showMessageDialog( null, "Erro na leitura do ficheiro " + nomeFich, "ERRO", JOptionPane.ERROR_MESSAGE );
-				System.exit( 1 );
-			}
-		} catch( Exception e ){
-			e.printStackTrace();
-			JOptionPane.showMessageDialog( null, "Erro na abertura do ficheiro " + nomeFich, "ERRO", JOptionPane.ERROR_MESSAGE );
-			System.exit( 1 );			
-		}
+	public boolean addCarProd(short loja, short produto) throws RemoteException {
 		
-		*/
+		 
 		
-		return null;
+		return this.carrinho.get(loja).add(produto);
 	}
-	
-	
-	
-	
+
+
+	// devolve o carrinho aqui n precisa de ir a base de dados 
+	@Override
+	public  Vector<Short> getCarProd(short guid) throws RemoteException {
+
+		return carrinho.get(guid) ;
+	}
+
+
+	// para pagar temos de percorrer os ficheiros para retirar os produtos da bd 
+	@Override
+	public synchronized Vector<Short>  payCarProd(short guid) throws RemoteException {
+
+
+
+		return carrinho.get(guid); 
+	}
+
+
+
+
 }

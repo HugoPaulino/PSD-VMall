@@ -4199,3 +4199,15 @@ org.eclipse.jgit.errors.CheckoutConflictException: Checkout conflict with file: 
 	at org.eclipse.egit.core.internal.job.JobUtil$2.runInWorkspace(JobUtil.java:105)
 	at org.eclipse.core.internal.resources.InternalWorkspaceJob.run(InternalWorkspaceJob.java:38)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.eclipse.egit.core 4 0 2014-11-13 03:16:32.978
+!MESSAGE An exception occurred during push on URI https://github.com/HugoPaulino/PSD-VMall.git: Nothing to push.
+!STACK 0
+org.eclipse.jgit.errors.TransportException: Nothing to push.
+	at org.eclipse.jgit.transport.Transport.push(Transport.java:1170)
+	at org.eclipse.egit.core.op.PushOperation.run(PushOperation.java:197)
+	at org.eclipse.egit.ui.internal.push.PushWizard$PushJob.run(PushWizard.java:298)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.eclipse.egit.ui 4 0 2014-11-13 03:16:32.980
+!MESSAGE Can't connect to any repository: https://github.com/HugoPaulino/PSD-VMall.git (Nothing to push.)
