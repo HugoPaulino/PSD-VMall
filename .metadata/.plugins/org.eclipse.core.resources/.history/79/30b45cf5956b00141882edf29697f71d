@@ -1,0 +1,48 @@
+package bdserver;
+
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.nio.channels.AlreadyBoundException;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import java.rmi.server.UnicastRemoteObject;
+
+
+
+public class Servidor {
+
+	public static void main(String[] args) throws java.rmi.AlreadyBoundException, IOException, NotBoundException {
+		
+		try {
+            DB_ServerImpl dbi = new DB_ServerImpl();
+       
+          
+            Remote remote = UnicastRemoteObject.exportObject((Remote) dbi,1099);
+    		
+    		
+    		Registry registry = LocateRegistry.createRegistry(1099);
+    		
+    		//Registry registry= LocateRegistry.getRegistry(1099);
+    		registry.rebind("Pepito", remote );
+    		
+    		System.out.println("Servidor Activo persione enter para terminar ");
+    		System.in.read();
+    		
+    		registry.unbind("Pepito");
+    		UnicastRemoteObject.unexportObject((Remote) dbi, true);
+            
+            
+            System.out.println("Registo RMI - Pronto a USAR!! \n");
+
+        } catch (RemoteException | AlreadyBoundException | MalformedURLException e) {
+            System.out.println("Error - Impossível Registar");
+        }
+		
+		
+	}
+
+}

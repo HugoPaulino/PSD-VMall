@@ -1,0 +1,30 @@
+package bdserver;
+
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.nio.channels.AlreadyBoundException;
+import java.rmi.Naming;
+import java.rmi.RemoteException;
+
+public class Servidor {
+
+	public static void main(String[] args) throws java.rmi.AlreadyBoundException, IOException {
+		
+		try {
+            DB_ServerImpl dbi = new DB_ServerImpl();
+       
+          
+            java.rmi.registry.LocateRegistry.createRegistry(1099);
+            Naming.bind("servidor", dbi); // Banco 1 - Banco dos pobres
+            
+            
+            System.out.println("Registo RMI - Pronto a USAR!! \n");
+
+        } catch (RemoteException | AlreadyBoundException | MalformedURLException e) {
+            System.out.println("Error - Impossível Registar");
+        }
+		
+		
+	}
+
+}
